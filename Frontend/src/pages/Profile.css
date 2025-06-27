@@ -1,0 +1,89 @@
+.profile-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: flex-start;
+    min-height: 500px;
+}
+
+.profile-title {
+    text-align: center;
+    margin-bottom: 16px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+
+.profile-info {
+    flex: 2;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 32px 36px;
+    font-size: 16px;
+    line-height: 3;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 400px;
+    
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f5;
+    margin-bottom: 8px;
+    border: 2px solid #10cc6b;
+}
+
+.profile-title input[type="file"] {
+    display: none;
+}
+
+.profile-title button {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    background: #10cc6b;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 15px;
+}
+
+.profile-title button:disabled {
+    background: #b2dfc7;
+    cursor: not-allowed;
+}
+
+.edit-btn {
+    margin-left: 24px;
+    padding: 3px 12px;
+    border-radius: 4px;
+    border: 1px solid #10cc6b;
+    background: #fff;
+    color: #10cc6b;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+.edit-btn:hover {
+    background: #10cc6b;
+    color: #fff;
+}

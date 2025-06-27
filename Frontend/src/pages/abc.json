@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Rau củ",
+    "image": "vegetable_icon2.webp",
+    "path": "/product"
+  },
+  {
+    "id": 2,
+    "name": "Hoa quả",
+    "image": "fruit_icon2.png",
+    "path": "/product"
+  },
+  {
+    "id": 3,
+    "name": "Gạo",
+    "image": "rice_icon.webp",
+    "path": "/product"
+  },
+  {
+    "id": 4,
+    "name": "Gia vị",
+    "image": "spice_icon2.jpg",
+    "path": "/product"
+  },
+  {
+    "id": 5,
+    "name": "Thịt",
+    "image": "meat_icon.webp",
+    "path": "/product"
+  },
+  {
+    "id": 6,
+    "name": "Hải sản",
+    "image": "seafood_icon.jpg",
+    "path": "/product"
+  },
+  {
+    "id": 7,
+    "name": "Sữa",
+    "image": "milk_icon.png",
+    "path": "/product"
+  },
+  {
+    "id": 8,
+    "name": "Đặc sản vùng miền",
+    "image": "meat_icon.webp",
+    "path": "/product"
+  },
+  {
+    "id": 9,
+    "name": "Đặc sản trà",
+    "image": "tea_icon.webp",
+    "path": "/product"
+  },
+  {
+    "id": 10,
+    "name": "Khuyến mãi",
+    "image": "sale_icon.webp",
+    "path": "/product"
+  }
+]
