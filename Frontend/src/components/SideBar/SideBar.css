@@ -33,6 +33,11 @@
     color: #10cc6b;
     border-bottom: 2px solid #10cc6b;
 }
+
+.sidebar-list button.active {
+    color: #2ecc40; /* Màu bạn muốn khi active */
+    font-weight: bold;
+}
 /* .sidebar-list button:hover:not(.active) {
 
 } */

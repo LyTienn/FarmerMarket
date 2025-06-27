@@ -2,109 +2,46 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import banner from '../assets/banner_logo.jpg';
-import vegetable from '../assets/vegetable_icon2.webp';
+// import vegetable from '../assets/vegetable_icon2.webp';
 import fruit from '../assets/fruit_icon2.png';
-import rice from '../assets/rice_icon.webp';
-import spice from '../assets/spice_icon2.jpg';
+// import rice from '../assets/rice_icon.webp';
+// import spice from '../assets/spice_icon2.jpg';
 import meat from '../assets/meat_icon.webp';
-import seafood from '../assets/seafood_icon.jpg';
-import drink from '../assets/milk_icon.png';
-import sale from '../assets/sale_icon.webp';
-import tea from '../assets/tea_icon.webp';
+// import seafood from '../assets/seafood_icon.jpg';
+// import drink from '../assets/milk_icon.png';
+// import sale from '../assets/sale_icon.webp';
+// import tea from '../assets/tea_icon.webp';
 
-const categories = [
-    {
-        id: 1,
-        name: 'Rau củ',
-        image: vegetable,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Hoa quả',
-        image: fruit,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Gạo',
-        image: rice,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Gia vị',
-        image: spice,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Thịt',
-        image: meat,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Hải sản',
-        image: seafood,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Sữa',
-        image: drink,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Đặc sản vùng miền',
-        image: meat,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Đặc sản trà',
-        image: tea,
-        path: '/product'
-    },
-    {
-        id: 1,
-        name: 'Khuyến mãi',
-        image: sale,
-        path: '/product'
-    },
-    
-]
 
 const fruits = [
     {
         id: 1,
         name: 'Táo',
-        image: vegetable,
+        image: fruit,
         path: './Dashboard.jsx'
     },
     {
         id: 2,
         name: 'Cam',
-        image: vegetable,
+        image: fruit,
         path: './Dashboard.jsx'
     },
     {
         id: 3,
         name: 'Chuối',
-        image: vegetable,
+        image: fruit,
         path: './Dashboard.jsx'
     },
     {
         id: 4,
         name: 'Xoài',
-        image: vegetable,
+        image: fruit,
         path: './Dashboard.jsx'
     },
     {
         id: 5,
         name: 'Dưa hấu',
-        image: vegetable,
+        image: fruit,
         path: './Dashboard.jsx'
     },
 ]
@@ -113,36 +50,36 @@ const vegetables = [
     {
         id: 1,
         name: 'Rau muống',
-        image: vegetable,
+        image: meat,
         path: './Dashboard.jsx'
     },
     {
         id: 1,
         name: 'Khoai tây',
-        image: vegetable,
+        image: meat,
         path: './Dashboard.jsx'
     },
     {
         id: 1,
         name: 'Cà chua',
-        image: vegetable,
+        image: meat,
         path: './Dashboard.jsx'
     },
     {
         id: 1,
         name: 'Ngô',
-        image: vegetable,
+        image: meat,
         path: './Dashboard.jsx'
     },
     {
         id: 1,
         name: 'Rau bắp cải',
-        image: vegetable,
+        image: meat,
         path: './Dashboard.jsx'
     },
 ]
 
-const Dashboard = (setSelectedCategory) => {
+const Dashboard = ({setSelectedCategory}) => {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
     const handleCategoryClick = (path) => {
@@ -170,7 +107,7 @@ const Dashboard = (setSelectedCategory) => {
                         <h2>Danh mục</h2>
                     </div>
                     <button className='all-btn'
-                    onClick={() => handleCategoryClick('/product')}>Tất cả</button>
+                    onClick={() => {handleCategoryClick('/product'); setSelectedCategory('all');}}>Tất cả</button>
                 </div>
                 <div className='category-grid'>
                     {categories.map((categories) => (
@@ -178,8 +115,7 @@ const Dashboard = (setSelectedCategory) => {
                             key={categories.id}
                             className='category-item'
                             onClick={() =>{ 
-                                handleCategoryClick(categories.path);
-                                setSelectedCategory(categories.key);
+                                navigate(`/product?category=${categories.key}`);
                             }}
                         >
                             <img

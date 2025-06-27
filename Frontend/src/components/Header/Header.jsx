@@ -131,6 +131,7 @@ const Header = () => {
             </div>
             <div className='header-cart'>
                 <img src={cartlogo} alt='Cart Logo' className='cart-icon' /*onClick={handleNavigateCart}*//>
+                Giỏ hàng (0)
             </div>
         </header>
     )

@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Cà chua hữu cơ",
+    "price": 25000,
+    "description": "Cà chua sạch, trồng theo phương pháp hữu cơ.",
+    "quantity": 100,
+    "stock": 100,
+    "category": "vegetable",
+    "image": "https://example.com/images/cachua.jpg"
+  },
+  {
+    "name": "Dưa leo sạch",
+    "price": 18000,
+    "description": "Dưa leo tươi, không sử dụng thuốc bảo vệ thực vật.",
+    "quantity": 80,
+    "stock": 80,
+    "category": "vegetable",
+    "image": "https://example.com/images/dualeo.jpg"
+  },
+  {
+    "name": "Khoai tây Đà Lạt",
+    "price": 30000,
+    "description": "Khoai tây tươi ngon, nguồn gốc Đà Lạt.",
+    "quantity": 60,
+    "stock": 60,
+    "category": "vegetable",
+    "image": "https://example.com/images/khoaitay.jpg"
+  },
+  {
+    "name": "Cà rốt hữu cơ",
+    "price": 22000,
+    "description": "Cà rốt giàu vitamin, trồng hữu cơ.",
+    "quantity": 90,
+    "stock": 90,
+    "category": "vegetable",
+    "image": "https://example.com/images/carot.jpg"
+  },
+  {
+    "name": "Bí đỏ",
+    "price": 20000,
+    "description": "Bí đỏ ngọt, không hóa chất.",
+    "quantity": 70,
+    "stock": 70,
+    "category": "vegetable",
+    "image": "https://example.com/images/bido.jpg"
+  },
+  {
+    "name": "Cam sành Lục Yên",
+    "price": 35000,
+    "description": "Cam sành mọng nước, giàu vitamin C.",
+    "quantity": 120,
+    "stock": 120,
+    "category": "fruit",
+    "image": "https://example.com/images/cam.jpg"
+  },
+  {
+    "name": "Táo Mỹ",
+    "price": 45000,
+    "description": "Táo nhập khẩu Mỹ, giòn ngọt.",
+    "quantity": 50,
+    "stock": 50,
+    "category": "fruit",
+    "image": "https://example.com/images/tao.jpg"
+  },
+  {
+    "name": "Chuối tiêu",
+    "price": 15000,
+    "description": "Chuối tiêu chín cây, ngọt tự nhiên.",
+    "quantity": 110,
+    "stock": 110,
+    "category": "fruit",
+    "image": "https://example.com/images/chuoi.jpg"
+  },
+  {
+    "name": "Sữa tươi vinamilk",
+    "price": 40000,
+    "description": "Sữa tươi nguyên chất, không chất bảo quản.",
+    "quantity": 60,
+    "stock": 60,
+    "category": "milk",
+    "image": "https://example.com/images/sua.jpg"
+  }
+]
