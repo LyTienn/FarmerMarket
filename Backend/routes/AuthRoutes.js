@@ -1,6 +1,6 @@
 import Router from 'express';
 import {login, logout, updateUserInfo, register, forgotPassword, changePassword} from '../controllers/AuthController.js';
-import {addProfileImage} from '../controllers/AuthController.js';
+import {addProfileImage, getUserInfo} from '../controllers/AuthController.js';
 import { getAllProducts, getAllCategories, getProductById } from '../controllers/ProductController.js';
 import { getCart, addToCart, updateCartItem, clearCart } from '../controllers/CartController.js';
 import upload from '../middlewares/AuthMiddlewares.js';
@@ -16,6 +16,7 @@ authRoutes.post('/change-password', verifyToken, changePassword);
 authRoutes.post('/addToCart', verifyToken, addToCart);
 authRoutes.put('/user-info',verifyToken, updateUserInfo);
 authRoutes.put('/updateCart', verifyToken, updateCartItem);
+authRoutes.get('/user-info2', verifyToken, getUserInfo);
 authRoutes.get('/product', getAllProducts);
 authRoutes.get('/category', getAllCategories);
 authRoutes.get('/product/:id', getProductById);

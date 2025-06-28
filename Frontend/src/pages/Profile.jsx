@@ -6,10 +6,33 @@ import userIcon from '../assets/user_icon.svg'; // Assuming you have a default u
 
 const Profile = () => {
     const navigate = useNavigate();
-    const [userInfo, setUserInfo] = useState(() => {
-        const u = localStorage.getItem('user');
-        return u ? JSON.parse(u) : {};
-    });
+    const [userInfo, setUserInfo] = useState({});
+    const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+    const fetchUserInfo = async () => {
+        const token = localStorage.getItem('jwt');
+        try {
+            const res = await fetch('http://localhost:3000/auth/user-info2', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setUserInfo(data);
+            }
+        } catch (error) {
+            console.error('Lỗi lấy thông tin user:', error);
+        }
+        setLoading(false);
+    };
+    fetchUserInfo();
+}, []);
+    // const [userInfo, setUserInfo] = useState(() => {
+    //     const u = localStorage.getItem('user');
+    //     return u ? JSON.parse(u) : {};
+    // });
     const [avatar, setAvatar] = useState(userInfo.avatar || '');
     const [uploading, setUploading] = useState(false);
     const fileInputRef = useRef();
@@ -24,6 +47,17 @@ const Profile = () => {
         gender: false,
         address: false,
     });
+
+    useEffect(() => {
+    setAvatar(userInfo.avatar || '');
+    setEditValues({
+        fullname: userInfo.fullname || '',
+        phone: userInfo.phone || '',
+        birthdate: userInfo.birthdate ? userInfo.birthdate.slice(0, 10) : '',
+        gender: userInfo.gender || '',
+        address: userInfo.address || '',
+    });
+    }, [userInfo]);
 
     // State tạm cho các trường chỉnh sửa
     const [editValues, setEditValues] = useState({
@@ -200,8 +234,8 @@ const Profile = () => {
                             style={{ marginLeft: 10 }}
                         >
                             <option value="">Chọn giới tính</option>
-                            <option value="nam">Nam</option>
-                            <option value="nữ">Nữ</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
                             <option value="khác">Khác</option>
                         </select>
                     ) : (

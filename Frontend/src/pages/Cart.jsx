@@ -1,9 +1,11 @@
 import { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         //Lấy giỏ hàng từ localStorage hoặc API backend
@@ -26,6 +28,10 @@ const Cart = () => {
         };
         fetchCart();
     }, []);
+
+    const handleNavigateDashBoard = () => {
+        navigate('/dashboard');
+    }
 
     const handleCheckout = () => {
         //Thêm API/navigate vào đây
@@ -55,26 +61,40 @@ const Cart = () => {
     };
 
     const handleClearCart = async () => {
-        //API clearCart
-        //fetch lại cart
-
+        const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : '';
+        await fetch('http://localhost:3000/auth/deleteCart', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        // Sau khi xóa, fetch lại giỏ hàng
+        const res = await fetch('http://localhost:3000/auth/cart', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (res.ok && data.items) {
+            setCart(data.items);
+            setTotal(0);
+        }
     }
 
     return (
         <div className = "cart-container">
             <div className = "cart-content">
                 {cart.length === 0 ? (
-                    <div>Giỏ hàng rỗng</div>
+                    <div className='cart-empty'>
+                    <p>Giỏ hàng rỗng</p>
+                    <button className='back-button' onClick={handleNavigateDashBoard}>Quay lại trang chủ</button>
+                    </div>
                 ) : (
+                <>
                     <ul style={{ listStyle: "none", padding: 0 }}>
                         {cart.map(item => (
                             <li key = {item.product._id} style = {{
                                 display: "flex",
                                 alignItems: "center",
-                                // marginBottom: 18,
-                                // background: "#fff",
                                 borderBottom: "2px solid #eee",
-                                // boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
                                 padding: 12,
                                 position: "relative"
                             }}>
@@ -120,6 +140,11 @@ const Cart = () => {
                             </li>
                         ))}
                     </ul>
+                    <button className='clearCart-btn'
+                    onClick={handleClearCart}>
+                        Xóa giỏ hàng
+                    </button>
+                </> 
                 )}
             </div>
             <div style={{
@@ -134,25 +159,11 @@ const Cart = () => {
             <div style={{ fontSize: 22, fontWeight: 700, color: "#10cc6b", margin: "18px 0" }}>
                 {total.toLocaleString()} VNĐ
             </div>
-            <button
-                style={{
-                    width: "100%",
-                    padding: "12px 0",
-                    background: "#10cc6b",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 6,
-                    fontWeight: 600,
-                    fontSize: 18,
-                    cursor: "pointer"
-                }}
+            <button className='purchase-btn'
                 onClick={handleCheckout}
                 disabled={cart.length === 0}
             >
                 Thanh toán
-            </button>
-            <button className="clearCart-btn">
-                Xoá giỏ hàng
             </button>
         </div>
     </div>

@@ -18,6 +18,32 @@ const Product = ( {selectedCategory, setSelectedCategory} ) => {
         ? product
         : product.filter(item => item.category === selectedCategory);
 
+    const handleAddToCart = async (product) => {
+    const token = localStorage.getItem('jwt');
+    try {
+        const res = await fetch('http://localhost:3000/auth/addToCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                productId: product._id,
+                quantity: 1
+            })
+        });
+        if (res.ok) {
+            alert(`Đã thêm ${product.name} vào giỏ hàng!`);
+            window.dispatchEvent(new Event('cart-updated'));
+        } else {
+            const data = await res.json();
+            alert(data.message || 'Thêm vào giỏ hàng thất bại!');
+        }
+    } catch (error) {
+        alert('Lỗi khi thêm vào giỏ hàng!');
+    }
+};
+
     return (
         <div className="product-container">
             <SideBar
@@ -39,9 +65,8 @@ const Product = ( {selectedCategory, setSelectedCategory} ) => {
                         <button
                             className="addtocart-btn"
                             onClick={e  => {
-                                //Xử lí thêm vào giỏ tại đây
                                 e.stopPropagation();
-                                alert(`Đã thêm ${product.name} vào giỏ hàng!`);
+                                handleAddToCart(product);
                             }}
                         >Thêm vào giỏ hàng</button>
                     </div>

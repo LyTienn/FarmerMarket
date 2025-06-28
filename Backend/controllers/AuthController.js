@@ -186,6 +186,7 @@ export const changePassword = async (req, res) => {
     }
 
     user.password = newPassword; // Set mật khẩu mới (chưa hash)
+    console.log(user);
     await user.save(); // Middleware pre('save') sẽ tự động hash
 
     res.status(200).json({ message: "Đổi mật khẩu thành công." });
