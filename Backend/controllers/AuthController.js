@@ -140,7 +140,7 @@ export const updateUserInfo = async (req, res) => {
     return res.status(400).json({ message: "User not authenticated." });
   }
   const { fullname, phone, address, birthdate, gender } = req.body;
-  const user = await User.findOneAndUpdate({_id: userId}, {
+  const user = await User.findByIdAndUpdate({_id: userId}, {
     fullname,
     phone,
     address,
@@ -156,7 +156,7 @@ export const changePassword = async (req, res) => {
     const userId = req.user?.userId;
 
     if (!userId) {
-      return res.status(400).json({ message: "User not authenticated." });
+      return res.status(400).json({ message: "Người dùng không tồn tại." });
     }
 
     const { currentPassword, newPassword, confirmPassword } = req.body;
@@ -176,7 +176,7 @@ export const changePassword = async (req, res) => {
     // Tìm user
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.status(404).json({ message: "Không tìm thấy người dùng." });
     }
 
     // Kiểm tra mật khẩu hiện tại

@@ -43,7 +43,8 @@ const Login = () => {
                 if (data.token) {
                     localStorage.setItem('jwt', data.token);
                 }
-                if (data.user) {
+                if (data.user && data.user) {
+                    data.user.token = data.token;
                     localStorage.setItem('user', JSON.stringify(data.user));
                 }
                 if (remember) {

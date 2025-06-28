@@ -120,6 +120,7 @@
     align-items: center;
     right: 23%;
     height: 45px;
+    cursor: pointer;
 }
 
 .header-cart .cart-icon {
@@ -153,8 +154,22 @@
     align-items: center;
 }
 
+.changepw-button {
+    background: #10cc6b;
+    color: #fff;
+    border: 'none';
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-bottom: 4px;
+    cursor: 'pointer';
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .view-profile-button:hover,
-.logout-button:hover {
+.logout-button:hover,
+.changepw-button:hover {
     filter: brightness(1.1);
 }
 

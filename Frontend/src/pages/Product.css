@@ -7,22 +7,32 @@
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(220px, 1fr));
-    gap: 20px;
-    padding: 24px;
+    grid-template-columns: repeat(4, 275px);
+    gap: 16px;
+    padding: 20px;
     margin-top: 70px;
     margin-left: 20px;
+    max-height: calc(100vh - 120px); /* Giới hạn chiều cao */
+    overflow-y: auto;
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;
+}
+
+.product-list::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari */
 }
 
 .product-item {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    padding: 18px 12px 16px 12px;
+    padding: 12px 10px 14px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: box-shadow 0.2s;
+    max-height: 260px;
+    overflow: hidden;
 }
 
 .product-item:hover {

@@ -17,6 +17,34 @@ const ProductDetail = () => {
 
     if(!product) return <div>Đang tải...</div>;
 
+    const handleAddToCart = async (e) => {
+        e.stopPropagation();
+        const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : '';
+        try {
+            const res = await fetch('http://localhost:3000/auth/addToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    productId: product._id,
+                    quantity,
+                    type: selectedType
+                })
+            });
+            if (res.ok) {
+                alert(`Đã thêm ${product.name} vào giỏ hàng!`);
+                window.dispatchEvent(new Event('cart-updated'));
+            } else {
+                const data = await res.json();
+                alert(data.message || "Thêm vào giỏ hàng thất bại!");
+            }
+        } catch (error) {
+            alert("Lỗi thêm vào giỏ hàng !");
+        }
+    };
+
     return (
     <div className="productDetail">
         <div className="productDetail-img-section">
@@ -59,11 +87,7 @@ const ProductDetail = () => {
             </div>
             <button
                 className="addtocart-button"
-                onClick={e  => {
-                    //Xử lí thêm vào giỏ tại đây
-                    e.stopPropagation();
-                    alert(`Đã thêm ${product.name} vào giỏ hàng!`);
-                }}
+                onClick={handleAddToCart}
             >Thêm vào giỏ hàng</button>
         </div>
     </div>

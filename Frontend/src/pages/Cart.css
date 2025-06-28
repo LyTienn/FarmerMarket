@@ -1,0 +1,13 @@
+.cart-container {
+    display: flex;
+    gap: 20;
+    padding: 50px 24px 24px 24px;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.cart-content {
+    flex: 2;
+    padding: 24;
+    min-height: 400;
+}

@@ -93,8 +93,10 @@ const Profile = () => {
             });
             const data = await res.json();
             if (res.ok) {
-                setUserInfo(data);
-                localStorage.setItem('user', JSON.stringify(data));
+                const oldUser = JSON.parse(localStorage.getItem('user'));
+                const newUser = { ...oldUser, ...data}; //merge
+                setUserInfo(newUser);
+                localStorage.setItem('user', JSON.stringify(newUser));
                 alert('Cập nhật thông tin thành công');
                 setEdit({
                     fullname: false,
@@ -114,6 +116,10 @@ const Profile = () => {
 
     return (
         <div className='profile-container'>
+            <button 
+                className='back-btn'
+                onClick={() => navigate(-1)}
+            >← Quay lại</button>
             <div className='profile-title'>
                 <h1>Thông tin tài khoản</h1>
                 <img src= {avatar || userIcon}

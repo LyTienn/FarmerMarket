@@ -50,6 +50,9 @@ const SideBar = ( {selectedCategory, setSelectedCategory} ) => {
                 <button className={`sale-sb${selectedCategory === 'sale' ? ' active' : ''}`}
                 onClick={() => setSelectedCategory('sale')}
                 >Khuyến mãi</button><br/>
+                <button className={`all-sb${selectedCategory === 'all' ? 'active' : ''}`}
+                onClick={() => setSelectedCategory('all')}
+                >Tất cả</button>
             </div>
         </div>
     )

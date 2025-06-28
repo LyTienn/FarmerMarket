@@ -6,6 +6,7 @@ import logo from '../../assets/farmer-logo.jpg';
 import cartlogo from '../../assets/Cart_Logo.svg';
 import search from '../../assets/search_icon.svg';
 import user_icon from '../../assets/user_icon.svg';
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,8 +14,43 @@ const Header = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [cartCount, setCartCount] = useState(0);
     const navigate = useNavigate();
 
+    //fetch giỏ hàng với mỗi user
+    useEffect(() => {
+        const fetchCartCount = async () => {
+            const user = localStorage.getItem('user');
+            const token = user ? JSON.parse(user).token : '';
+            if (!token) {
+                setCartCount(0);
+                return;
+            }
+            try {
+                const res = await fetch('http://localhost:3000/auth/cart', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (res.ok && data.items) {
+                    setCartCount(data.items.length);
+                } else {
+                    setCartCount(0);
+                }
+            } catch {
+                setCartCount(0);
+            }
+        };
+        fetchCartCount();
+        // Lắng nghe sự kiện cập nhật giỏ hàng
+        const handleCartUpdated = () => fetchCartCount();
+        window.addEventListener('cart-updated', handleCartUpdated);
+
+        return () => {
+            window.removeEventListener('cart-updated', handleCartUpdated);
+        };
+    }, [isLoggedIn]); 
+
+    //Kiểm tra token của user
     useEffect(() => {
         const token = localStorage.getItem('jwt');
         const user = localStorage.getItem('user');
@@ -59,6 +95,10 @@ const Header = () => {
         navigate('/dashboard');
     };
 
+    const handleChangePassword = () => {
+        navigate('/change-password');
+    }
+
     const handleViewProfile = () => {
         navigate('/profile');
     }
@@ -68,6 +108,9 @@ const Header = () => {
         window.location.reload();
     };
 
+    const handleNavigateCart = () => {
+        navigate('/cartUser');
+    }
 
     return (
         <header className='header-container' style={{ backgroundColor: isScrolled ? '#fff' : 'transparent' }}>
@@ -112,6 +155,10 @@ const Header = () => {
                                         alt="User Icon"
                                         style={{ width: 16, height: 16, borderRadius:'50%', marginRight: 4, verticalAlign: 'middle'}}
                                     /><span style={{ flex: 1, textAlign: 'center' }}>Tài khoản</span></button>
+                                <button className='changepw-button' onClick={handleChangePassword}>
+                                    <RiLockPasswordLine style={{ width: 16, height: 16, marginRight: 4, verticalAlign: 'middle'}}
+                                    /><span style={{ flex: 1, textAlign: 'center' }}>Đổi mật khẩu</span>
+                                </button>
                                 <button className='logout-button' onClick={handleLogout}>
                                     <FiLogOut style={{ width: 16, height: 16, marginRight: 4, verticalAlign: 'middle' }}
                                     /><span style={{ flex: 1, textAlign: 'center' }}>Đăng xuất</span></button>
@@ -130,8 +177,8 @@ const Header = () => {
                 <img src={search} alt = 'search icon' className='search-icon'/>
             </div>
             <div className='header-cart'>
-                <img src={cartlogo} alt='Cart Logo' className='cart-icon' /*onClick={handleNavigateCart}*//>
-                Giỏ hàng (0)
+                <img src={cartlogo} alt='Cart Logo' className='cart-icon' onClick={handleNavigateCart}/>
+                Giỏ hàng ({cartCount})
             </div>
         </header>
     )
