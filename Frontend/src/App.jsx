@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import CartDeliveryInfo from './pages/CartDeliveryInfo';
 import './App.css';
 import SideBar from './components/SideBar/SideBar';
 
@@ -37,6 +38,7 @@ function AppContent() {
         <Route path="/SideBar" element={<SideBar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cartUser" element={<Cart />} />
+        <Route path="/deliveryInfo" element={<CartDeliveryInfo />} />
         {/* Add more routes as needed */}
       </Routes>
     </>

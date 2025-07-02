@@ -2,80 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import banner from '../assets/banner_logo.jpg';
-// import vegetable from '../assets/vegetable_icon2.webp';
+import apple from '../assets/apple.png';
 import fruit from '../assets/fruit_icon2.png';
-// import rice from '../assets/rice_icon.webp';
-// import spice from '../assets/spice_icon2.jpg';
 import meat from '../assets/meat_icon.webp';
-// import seafood from '../assets/seafood_icon.jpg';
-// import drink from '../assets/milk_icon.png';
-// import sale from '../assets/sale_icon.webp';
-// import tea from '../assets/tea_icon.webp';
+import mango from '../assets/mango.webp';
+import milk from '../assets/milk.jpg';
+import fish from '../assets/fish.jpg';
+import tea from '../assets/tea.webp';
 
 
 const fruits = [
     {
         id: 1,
-        name: 'Táo',
-        image: fruit,
-        path: './Dashboard.jsx'
+        name: 'Hoa quả tây bắc',
+        image: apple,
+        path: './Dashboard.jsx',
+        key: 'fruit'
     },
     {
         id: 2,
-        name: 'Cam',
-        image: fruit,
-        path: './Dashboard.jsx'
+        name: 'Sữa bò',
+        image: milk,
+        path: './Dashboard.jsx',
+        key: "milk"
     },
     {
         id: 3,
-        name: 'Chuối',
-        image: fruit,
-        path: './Dashboard.jsx'
+        name: 'Cá nuôi sông',
+        image: fish,
+        path: './Dashboard.jsx',
+        key: "fish"
     },
     {
         id: 4,
-        name: 'Xoài',
-        image: fruit,
-        path: './Dashboard.jsx'
+        name: 'Trà thảo dược',
+        image: tea,
+        path: './Dashboard.jsx',
+        key: "tea"
     },
     {
         id: 5,
-        name: 'Dưa hấu',
+        name: 'Đặc sản vùng miền',
         image: fruit,
-        path: './Dashboard.jsx'
-    },
-]
-
-const vegetables = [
-    {
-        id: 1,
-        name: 'Rau muống',
-        image: meat,
-        path: './Dashboard.jsx'
-    },
-    {
-        id: 1,
-        name: 'Khoai tây',
-        image: meat,
-        path: './Dashboard.jsx'
-    },
-    {
-        id: 1,
-        name: 'Cà chua',
-        image: meat,
-        path: './Dashboard.jsx'
-    },
-    {
-        id: 1,
-        name: 'Ngô',
-        image: meat,
-        path: './Dashboard.jsx'
-    },
-    {
-        id: 1,
-        name: 'Rau bắp cải',
-        image: meat,
-        path: './Dashboard.jsx'
+        path: './Dashboard.jsx',
+        key: "traditionfood"
     },
 ]
 
@@ -129,13 +99,13 @@ const Dashboard = ({setSelectedCategory}) => {
                 </div>
             </div>
             <div className='hot-search'>
-                <h2>Hoa quả tươi</h2>
+                <h2>Thực phẩm tươi</h2>
                 <div className='hot-grid'>
                     {fruits.map((fruit) => (
                         <div
                             key={fruit.id}
                             className='fruit-item'
-                            onClick={() => handleCategoryClick(fruit.path)}
+                            onClick={() => navigate(`/product?category=${fruit.key}`)}
                         >
                             <img
                                 src={fruit.image}
@@ -145,24 +115,7 @@ const Dashboard = ({setSelectedCategory}) => {
                             <h3 className='fruit-name'>{fruit.name}</h3>
                         </div>
                     ))}
-                </div>
-                <h2>Rau củ tươi</h2>
-                <div className='hot-grid'>
-                    {vegetables.map((vegetable) => (
-                        <div
-                            key={vegetable.id}
-                            className='fruit-item'
-                            onClick={() => handleCategoryClick(vegetable.path)}
-                        >
-                            <img
-                                src={vegetable.image}
-                                alt={vegetable.name}
-                                className='fruit-image'
-                            />
-                            <h3 className='fruit-name'>{vegetable.name}</h3>
-                        </div>
-                    ))}
-                </div>
+                </div> 
             </div>
         </div>
     );

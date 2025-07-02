@@ -34,8 +34,7 @@ const Cart = () => {
     }
 
     const handleCheckout = () => {
-        //Thêm API/navigate vào đây
-        alert("Thanh toán ...");
+        navigate('/deliveryInfo');
     };
 
     const handleUpdateQuantity = async (productId, newQuantity) => {

@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../components/SideBar/SideBar";
 import './Product.css';
@@ -7,12 +7,19 @@ import './Product.css';
 const Product = ( {selectedCategory, setSelectedCategory} ) => {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
-    // const [selectedCategory, setSelectedCategory] = useState([]);
+    const location = useLocation();
     useEffect(() => {
         fetch('http://localhost:3000/auth/product')
             .then(res => res.json())
             .then(data => setProduct(data));
     }, []);
+
+    // Lấy category từ query string
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const cat = params.get('category');
+        if (cat) setSelectedCategory(cat);
+    }, [location.search, setSelectedCategory]);
 
     const filteredProduct = selectedCategory === 'all'
         ? product
